@@ -40,47 +40,21 @@ function Cadastro() {
 
     function HandleSubmit(){
         
-        /* window.localStorage.setItem("usuarios", "")
-        var listaVazia = []
-        window.localStorage.setItem("usuarios", listaVazia)
-        console.log(window.localStorage.getItem("usuarios"))
-        var listaNova = [JSON.stringify(usuario)]
-        window.localStorage.setItem("usuarios", listaNova)
-        console.log(window.localStorage.getItem("usuarios"))
-        var listaAtual = window.localStorage.getItem("usuarios")
-        console.log((listaAtual)) */
-        
         const listaUsuarios = window.localStorage.getItem("usuarios")
 
         if (listaUsuarios === null ){
-            console.log("Caso da lista vazia")
-            var listaCadastro = JSON.stringify(usuario)
-            window.localStorage.setItem("usuarios", listaCadastro)
-            console.log(window.localStorage.getItem("usuarios"))
-            var listaNova = [window.localStorage.getItem("usuarios")]
-            console.log(JSON.parse(listaNova))
-            window.localStorage.setItem("usuarios", listaNova)
-            var listaAtual = window.localStorage.getItem("usuarios")
-
-            /* Para Obter a lista é so a usar a linha 62 e dar um parse nela 
-            var listaAtual = window.localStorage.getItem("usuarios")
-            console.log((JSON.parse(listaAtual)))*/
-
-
+            var usuarioCadastro = JSON.stringify(usuario)
+            var listaCadastrada = [usuario]
+            window.localStorage.setItem("usuarios", JSON.stringify(listaCadastrada))
         } else {
             console.log("Caso da lista que não está cheia")
-            var listaCadastros = [window.localStorage.getItem("usuarios")]
-            console.log(listaCadastros)
-            listaCadastros.push(JSON.stringify(usuario))
-            console.log(listaCadastros)
-            window.localStorage.setItem("usuarios", listaCadastros)
-            console.log(window.localStorage.getItem("usuarios"))
-            /*window.localStorage.removeItem("usuarios")*/
-            
-            /*var listaAdicionar = JSON.stringify(listaUsuarios)
-            window.localStorage.setItem("usuarios", JSON.stringify(listaAdicionar))*/
+            var listaString = (window.localStorage.getItem("usuarios"))
+            var listaCadastros = (JSON.parse(listaString))
+            listaCadastros.push(usuario)
+            window.localStorage.removeItem("usuarios")
+            window.localStorage.setItem("usuarios", JSON.stringify(listaCadastros))
         }
-        /*history.push('/consulta')*/
+        history.push('/consulta')
     }
 
     const usuario = {
@@ -110,7 +84,7 @@ function Cadastro() {
                                 {
                                     isOpen ?
                                         <Row md={{ span: 1, offset: 1 }}>
-                                            <Col md={{ span: 4, offset: 4 }}>
+                                            <Col md={{ span: 4, offset: 4 }} style={{"borderColor":"crimson","border":"3px"}}>
                                                 <Button variant="dark" size="sm" onClick={()=>(setTipo("Fisica"),setPattern("[0-9]{3}?[0-9]{3}?[0-9]{3}[-]?[0-9]{2}"))} active> CPF </Button>
                                             </Col>
                                             <Col md={{ span: 4, offset: 4 }}>
@@ -122,7 +96,7 @@ function Cadastro() {
                                         null
                                 }
                             </div>
-                            <Form.Label>{ (tipo === "CPF") ? "CPF: " : "CNPJ: "}</Form.Label>
+                            <Form.Label>{ (tipo === "Fisica") ? "CPF: " : "CNPJ: "}</Form.Label>
                             <Form.Control onChange={HandleChangeCpfCnpj}  pattern={pattern} placeholder={ (tipo === "Fisica") ? "XXXXXXXXXXX" : "XXXXXXXXXXXXXX"}/>
                         </Col>
                     </Row>
@@ -164,11 +138,11 @@ function Cadastro() {
                             <Form.Control onChange={HandleChangeEmail} required/>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col md={{ span: 4, offset: 4 }}>
+                    <Container md={{ span: 4, offset: 4 }}>
+                        <Col>
                             <Button variant="dark" onClick={HandleSubmit}> SALVAR </Button>
                         </Col>
-                    </Row>
+                    </Container>
                 </Container>
             </Form>
                 

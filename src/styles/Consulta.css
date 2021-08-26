@@ -1,0 +1,20 @@
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+
+
+.box-outside{
+    display:flex;
+    padding-bottom:10px;
+
+    flex-direction: column;
+}
