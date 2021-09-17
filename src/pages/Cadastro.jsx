@@ -15,7 +15,7 @@ import axios from 'axios';
 function Cadastro() {
 
     const [isOpen, setIsOpen] = useState(false)
-    const [pattern, setPattern] = useState("[0-9]{2}?[0-9]{3}?[0-9]{3}?[0-9]{4}[-]?[0-9]{2}")
+    const [pattern, setPattern] = useState("[0-9]{3}?[0-9]{3}?[0-9]{3}[-]?[0-9]{2}")
     var id = uuidv4()
     const [tipo, setTipo] = useState("Fisica")
     const [cpfCnpj, setCpfCnpj] = useState(0)
@@ -126,7 +126,7 @@ function Cadastro() {
                                 }
                             </div>
                             <Form.Label>{ (tipo === "Fisica") ? "CPF: " : "CNPJ: "}</Form.Label>
-                            <Form.Control onChange={HandleChangeCpfCnpj}  minLength={ (tipo === "Fisico") ? "11" : "14"} pattern={pattern} placeholder={ (tipo === "Fisica") ? "XXXXXXXXXXX" : "XXXXXXXXXXXXXX"} required/>
+                            <Form.Control onChange={HandleChangeCpfCnpj}  minLength={ (tipo === "Fisica") ? "11" : (tipo === "Juridica") ? "14" : null} pattern={pattern} placeholder={ (tipo === "Fisica") ? "XXXXXXXXXXX" : "XXXXXXXXXXXXXX"} required/>
                         </Col>
                     </Row>
                     <Row>
